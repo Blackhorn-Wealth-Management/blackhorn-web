@@ -1,8 +1,9 @@
 # CLAUDE.md — Blackhorn Wealth Management Website Project Context
 
 > **Read this file first.** It contains the full project history, architecture,
-> current state, and pending tasks. This file exists because the original
-> Claude Code session was lost when the project folder was moved.
+> current state, and pending tasks.
+>
+> **Last updated:** May 2026 — post Codex audit cleanup, pre-handoff to Blackhorn IT.
 
 ---
 
@@ -172,56 +173,36 @@ src/app/
 
 ---
 
-## PENDING / IN PROGRESS
+## CURRENT STATUS (May 2026)
 
-### Ready to Run (prompts already written)
-1. **Sanity data migration** — Run scripts/migrate-to-sanity.ts to populate CMS with all existing hardcoded content
-2. **Hero images update** — Replace heroes with Rachel's new scenery photos:
-   - `hk-peak-sunset-hires.jpg` (2500x1522) → Homepage hero
-   - `hk-harbour-masked.jpg` (3000x2000, black sky) → About page hero
-   - `hk-night-aerial.jpg` (1600x896) → Services/Contact/inner pages
-   Process with Sharp: resize to max 1920px, convert to WebP, generate blur placeholders
-3. **Remove fraud popup + diamond shapes** — Delete FraudNoticeModal component (keep /important-notice page), remove decorative diamond/horn SVG shapes from hero corners
-4. **basePath fix** — Add `basePath: '/studio'` to sanity.config.ts
+### ✅ Completed
+- Full bilingual site live on staging (blackhorn-web.vercel.app)
+- Sanity CMS connected with all content types, bilingual fields, ISR revalidation
+- Investor gate (disclaimer bottom sheet) — 1-hour TTL, bilingual
+- All 6 service pages with CMS-driven content
+- About sub-pages (leadership, advisors, vision, expertise, philosophy, partnerships, location)
+- Insights hub (news, press, events)
+- Contact form with Resend email delivery
+- Awards, Careers pages
+- Sitemap (en + zh-hant, static + dynamic Sanity routes)
+- HTTP security headers (CSP, HSTS, X-Frame-Options, etc.)
+- Codex audit completed May 2026 — all High + Medium issues resolved
+- Dead code cleanup — 31 unused files removed, 150MB+ of junk purged from repo
 
-### Rachel Feedback Round 2 — THREE PHASES
+### ⏳ Pending / Not Started
+- **DNS cutover** — blackhorngrp.com not yet pointed to Vercel
+- **Chinese content** — i18n infrastructure ready, CMS `_zh` fields exist, content not entered
+- **Privacy Policy** — needs legal counsel (PDPO-compliant)
+- **Neue Montreal font** — currently using Inter as stand-in (~$50 licence from Pangram Pangram)
+- **Additional team members** — Andy Yuen (COO), Wong Po Sum, Danika Ma, Gregory Ng, Jody Leung
+- **Remaining a11y items** — focus trap on investor gate, aria-pressed on contact form toggles, htmlFor on labels
+- **Sanity visionTool** — disable in production sanity.config.ts (currently dev-only risk)
 
-**Phase A — Quick Fixes (DO THIS NEXT):**
-- Navbar text contrast: change grey menu items to white, gold hover states, solid dark-900 background
-- Contact CTA component: reusable section at bottom of every page (above footer) with "Ready to discuss?" heading + Book a Consultation button + phone link
-- Homepage hero color tuning: lighten gradient overlay so sunset photo shows through more (Rachel wants it to look like her pitchbook)
-- Scam warning banner contrast check
-
-**Phase B — Structural (AFTER Phase A):**
-- Split About page into sub-pages:
-  - /about/our-expertise
-  - /about/our-philosophy
-  - /about/commitment-to-results
-  - /about/partnerships
-  - /about/leadership (management team)
-  - /about/advisors (advisory board)
-- Add dropdown navigation menus (About dropdown with sub-pages, possibly Services too)
-- Each sub-page follows Charles Monat pattern: Hero/quote → content with side photos → Contact CTA
-
-**Phase C — Design Overhaul (AFTER Phase B):**
-- Mixed dark/light design: some sections with white background + dark text for formality
-- Charles Monat-inspired inner page template (minimal, big fonts, eye-catching photos)
-- UBS HK-style contact form with qualifying questions (Are you an existing client? Investor type? Services interested in?)
-- Overall color tone refinement
-
-### Blockers from Rachel (content still needed)
-- Privacy Policy (legal counsel, PDPO-compliant)
-- Wilson Hui high-res headshot
-- Peter Tsang headshot
-- Andrew Lo headshot
-- Updated team photos (she mentioned newer versions)
-- Neue Montreal font files (or confirm license purchase — ~$50 from Pangram Pangram)
+### 📬 Content still needed from Rachel
+- Wilson Hui / Peter Tsang / Andrew Lo high-res headshots
 - LinkedIn URL confirmation
-- Additional team members to add? (Andy Yuen, Wong Po Sum, Danika Ma, Gregory Ng, Jody Leung)
-- Chinese logo preference: 晉羚集團 vs 晉羚財富管理
-- Family Office page structure decision
-- Chinese translations (infrastructure ready, content needed)
-- Contact form recipient confirmation
+- Privacy Policy (from legal)
+- Chinese translations for all CMS content
 
 ---
 
