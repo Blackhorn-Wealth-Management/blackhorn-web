@@ -79,7 +79,7 @@ const portableTextComponents = {
             className="w-full"
           />
           {value.caption && (
-            <figcaption className="mt-3 text-center font-sans text-xs text-muted">
+            <figcaption className="mt-3 text-center font-sans text-xs text-light-text-secondary">
               {value.caption}
             </figcaption>
           )}
@@ -89,29 +89,29 @@ const portableTextComponents = {
   },
   block: {
     h2: ({ children }: { children?: React.ReactNode }) => (
-      <h2 className="mb-4 mt-12 font-serif text-3xl font-light text-light">
+      <h2 className="mb-4 mt-12 font-serif text-3xl font-light text-light-text">
         {children}
       </h2>
     ),
     h3: ({ children }: { children?: React.ReactNode }) => (
-      <h3 className="mb-3 mt-8 font-serif text-2xl font-light text-light">
+      <h3 className="mb-3 mt-8 font-serif text-2xl font-light text-light-text">
         {children}
       </h3>
     ),
     normal: ({ children }: { children?: React.ReactNode }) => (
-      <p className="mb-6 font-sans text-lg font-light leading-relaxed text-white/80">
+      <p className="mb-6 font-sans text-lg font-light leading-relaxed text-light-text-secondary">
         {children}
       </p>
     ),
     blockquote: ({ children }: { children?: React.ReactNode }) => (
-      <blockquote className="my-8 border-l-2 border-gold pl-6 font-serif text-xl italic leading-relaxed text-white/70">
+      <blockquote className="my-8 border-l-2 border-gold pl-6 font-serif text-xl italic leading-relaxed text-light-text-secondary">
         {children}
       </blockquote>
     ),
   },
   marks: {
     strong: ({ children }: { children?: React.ReactNode }) => (
-      <strong className="font-medium text-light">{children}</strong>
+      <strong className="font-medium text-light-text">{children}</strong>
     ),
     em: ({ children }: { children?: React.ReactNode }) => (
       <em className="italic">{children}</em>
@@ -162,9 +162,9 @@ export default async function BlogPostPage({ params }: Props) {
           { name: localized(post, 'title', locale), href: `/insights/news/${slug}` },
         ]}
       />
-      <main className="min-h-screen bg-dark">
+      <main className="min-h-screen bg-white">
         {/* Hero / Cover Image */}
-        <section className="relative pb-0 pt-24">
+        {/* <section className="relative pb-0 pt-24">
           {post.coverImageUrl ? (
             <div className="relative h-[50vh] min-h-[400px] w-full md:h-[60vh]">
               <Image
@@ -180,10 +180,32 @@ export default async function BlogPostPage({ params }: Props) {
           ) : (
             <div className="h-24" />
           )}
-        </section>
+        </section> */}
 
+        {/* Hero photo — full-bleed, sits below fixed navbar */}
+        {/*
+        {post.coverImageUrl ? (
+          <section className="relative pt-24">
+            <div className="relative h-[45vh] min-h-[340px] w-full md:h-[55vh]">
+              <Image
+                src={post.coverImageUrl}
+                alt={post.coverImageAlt || localized(post, 'title', locale)}
+                fill
+                className="object-cover object-[center_20%]"
+                priority
+                sizes="100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent" />
+            </div>
+          </section>
+        ) : (
+          <div className="h-24 bg-light-bg" />
+        )}
+        */}
+
+        <div className="h-24 bg-light-bg" />
         {/* Article Header */}
-        <section className={`${post.coverImageUrl ? '-mt-32 relative z-10' : ''} pb-8`}>
+        <section className={`${post.coverImageUrl ? 'relative z-10' : ''} py-10`}>
           <div className="mx-auto max-w-3xl px-6">
             <FadeIn>
               {/* Back link */}
@@ -211,7 +233,7 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
 
               {/* Title */}
-              <h1 className="font-serif text-3xl font-light leading-tight text-light md:text-4xl lg:text-5xl">
+              <h1 className="font-serif text-3xl font-light leading-tight text-light-text md:text-4xl lg:text-5xl">
                 {localized(post, 'title', locale)}
               </h1>
 
@@ -275,10 +297,10 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
-          <section className="border-t border-gold/6 bg-dark-section py-16">
+          <section className="border-t border-gold/6 bg-white-section py-16">
             <div className="mx-auto max-w-7xl px-6">
               <FadeIn>
-                <h2 className="mb-10 font-serif text-2xl font-light text-light">
+                <h2 className="mb-10 font-serif text-2xl font-light text-light-text">
                   {t('relatedPosts')}
                 </h2>
               </FadeIn>
@@ -287,7 +309,7 @@ export default async function BlogPostPage({ params }: Props) {
                   <FadeIn key={related._id} delay={i * 0.1}>
                     <Link
                       href={`/insights/news/${related.slug.current}`}
-                      className="group flex flex-col border-[0.5px] border-gold/8 bg-dark-card transition-all duration-[450ms] hover:border-gold/15 hover:bg-gold/[0.03]"
+                      className="group flex flex-col border-[0.5px] border-gold/8 bg-white-card transition-all duration-[450ms] hover:border-gold/15 hover:bg-gold/[0.03]"
                     >
                       <div className="relative aspect-[16/9] overflow-hidden">
                         {related.coverImageUrl ? (
@@ -299,7 +321,7 @@ export default async function BlogPostPage({ params }: Props) {
                             sizes="(max-width: 768px) 100vw, 33vw"
                           />
                         ) : (
-                          <div className="flex h-full items-center justify-center bg-dark-700">
+                          <div className="flex h-full items-center justify-center bg-whit-700">
                             <span className="text-2xl text-gold/20">BH</span>
                           </div>
                         )}
@@ -310,7 +332,7 @@ export default async function BlogPostPage({ params }: Props) {
                             {t(CATEGORY_KEYS[related.category] || 'allPosts')}
                           </span>
                         )}
-                        <h3 className="mt-2 font-serif text-lg font-light leading-snug text-light transition-colors duration-300 group-hover:text-gold line-clamp-2">
+                        <h3 className="mt-2 font-serif text-lg font-light leading-snug text-light-text transition-colors duration-300 group-hover:text-gold line-clamp-2">
                           {localized(related, 'title', locale)}
                         </h3>
                         <span className="mt-3 block font-sans text-xs text-muted">
